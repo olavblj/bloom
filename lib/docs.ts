@@ -299,9 +299,11 @@ import { hashSeedToVariant, hashSeedToPalette } from "@/lib/bloom";
       status: "Usable",
       score: 55,
       done: [
-        "6 named palettes defined",
-        "5 variants implemented",
+        "12 named palettes defined",
+        "8 variants implemented",
         "Custom palette support",
+        "Seed-based param sampling per variant",
+        "Petal layering and two-tone tinting",
       ],
       remaining: [
         "Palette preview swatches in docs",
@@ -317,19 +319,24 @@ import { hashSeedToVariant, hashSeedToPalette } from "@/lib/bloom";
     content: `
 ## Variants
 
-Bloom ships with **5 variants** (minimum 4 required):
+Bloom ships with **8 variants**:
 
 | Variant | Label | Description |
 |---------|-------|-------------|
-| \`daisy\` | Daisy | Classic radial petals, 8–16 count |
-| \`rose\` | Rose | Layered spiral with decreasing scale |
+| \`daisy\` | Daisy | Radial petals with layering, 10–16 count |
+| \`rose\` | Rose | Concentric rings with twist and fold center |
 | \`tulip\` | Tulip | Cup-shaped curved petals, taller stem |
-| \`lotus\` | Lotus | Dual-layer pointed petals |
-| \`sunburst\` | Sunburst | Many thin radiating petals |
+| \`lotus\` | Lotus | Dual-layer petals with back ring |
+| \`sunburst\` | Sunburst | Many thin radiating petals with seed-dot ring |
+| \`forgetmenot\` | Forget-me-not | Overlapping ellipses with white eye ring |
+| \`daylily\` | Daylily | 3-back + 3-front petals, optional midribs and stamens |
+| \`poppy\` | Poppy | Crinkled wide petals with center dot ring |
+
+Each variant samples **ParamSpec-style knobs** from the seed: petal count, layering mode, two-tone, openness, and type-specific details. Same seed + variant + palette always replays identically.
 
 ## Named palettes
 
-Six palettes are built in:
+Twelve palettes are built in:
 
 | Name | Mood |
 |------|------|
@@ -339,6 +346,12 @@ Six palettes are built in:
 | \`coral\` | Bright tropical tones |
 | \`forest\` | Muted greens and lavender |
 | \`lavender\` | Soft purple botanical |
+| \`sapphire\` | Cool blues with golden center |
+| \`amber\` | Warm golden sun tones |
+| \`rosewater\` | Blush pinks and dusty rose |
+| \`mint\` | Fresh green botanical |
+| \`slate\` | Cool neutral greys |
+| \`blossom\` | Bright cherry blossom pink |
 
 Each palette defines six colors: \`petal\`, \`petalAlt\`, \`center\`, \`stem\`, \`leaf\`, \`background\`.
 
