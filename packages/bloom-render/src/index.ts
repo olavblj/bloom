@@ -2,10 +2,13 @@ export { createPrng, prngInt, prngFloat, pick } from "./prng";
 export {
   NAMED_PALETTES,
   PALETTE_NAMES,
+  PALETTE_META,
+  palettesForHueFamilies,
   resolvePalette,
   type NamedPalette,
   type PaletteColors,
   type PaletteInput,
+  type HueFamily,
 } from "./palettes";
 export {
   VARIANTS,
@@ -17,5 +20,7 @@ export {
   hashSeedToVariant,
   hashSeedToPalette,
   type RenderFlowerOptions,
-  type FlowerParams,
 } from "./render";
+export { deriveParams, type FlowerParams } from "./params";
+export { hexToHsl, hslToHex, jitterColor, tintColor, contrastBackground } from "./color";
+export { petalOrder, type LayeringMode } from "./layering";

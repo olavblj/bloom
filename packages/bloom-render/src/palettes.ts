@@ -7,13 +7,34 @@ export interface PaletteColors {
   background: string;
 }
 
+export type HueFamily =
+  | "pink"
+  | "red"
+  | "orange"
+  | "yellow"
+  | "green"
+  | "blue"
+  | "purple"
+  | "neutral";
+
 export type NamedPalette =
   | "meadow"
   | "sunset"
   | "twilight"
   | "coral"
   | "forest"
-  | "lavender";
+  | "lavender"
+  | "sapphire"
+  | "amber"
+  | "rosewater"
+  | "mint"
+  | "slate"
+  | "blossom";
+
+export interface PaletteMeta {
+  colors: PaletteColors;
+  hueFamily: HueFamily;
+}
 
 export type PaletteInput = NamedPalette | PaletteColors;
 
@@ -66,6 +87,69 @@ export const NAMED_PALETTES: Record<NamedPalette, PaletteColors> = {
     leaf: "#8B7B8B",
     background: "#F5F0FA",
   },
+  sapphire: {
+    petal: "#5B8FD4",
+    petalAlt: "#8BB4E8",
+    center: "#F0D060",
+    stem: "#3A6B4A",
+    leaf: "#5A9A6A",
+    background: "#EEF4FA",
+  },
+  amber: {
+    petal: "#E8A830",
+    petalAlt: "#F5C860",
+    center: "#8B4513",
+    stem: "#4A7A3A",
+    leaf: "#6B9A4A",
+    background: "#FFF9EE",
+  },
+  rosewater: {
+    petal: "#E8909A",
+    petalAlt: "#F5B8C0",
+    center: "#C06070",
+    stem: "#5A8A5A",
+    leaf: "#7AAA6A",
+    background: "#FFF5F6",
+  },
+  mint: {
+    petal: "#7EC8A0",
+    petalAlt: "#A8E0C0",
+    center: "#F0E878",
+    stem: "#3A6A4A",
+    leaf: "#5A9A6A",
+    background: "#F0FAF4",
+  },
+  slate: {
+    petal: "#8A9AB0",
+    petalAlt: "#B0BCC8",
+    center: "#506070",
+    stem: "#3A4A5A",
+    leaf: "#5A6A7A",
+    background: "#EEF0F4",
+  },
+  blossom: {
+    petal: "#F0A0C0",
+    petalAlt: "#F8C0D8",
+    center: "#FFD878",
+    stem: "#4A8A5A",
+    leaf: "#6AAA6A",
+    background: "#FFF8FA",
+  },
+};
+
+export const PALETTE_META: Record<NamedPalette, { hueFamily: HueFamily }> = {
+  meadow: { hueFamily: "pink" },
+  sunset: { hueFamily: "orange" },
+  twilight: { hueFamily: "purple" },
+  coral: { hueFamily: "red" },
+  forest: { hueFamily: "green" },
+  lavender: { hueFamily: "purple" },
+  sapphire: { hueFamily: "blue" },
+  amber: { hueFamily: "yellow" },
+  rosewater: { hueFamily: "pink" },
+  mint: { hueFamily: "green" },
+  slate: { hueFamily: "neutral" },
+  blossom: { hueFamily: "pink" },
 };
 
 export const PALETTE_NAMES = Object.keys(NAMED_PALETTES) as NamedPalette[];
@@ -75,4 +159,13 @@ export function resolvePalette(palette: PaletteInput): PaletteColors {
     return NAMED_PALETTES[palette];
   }
   return palette;
+}
+
+/** Palettes whose hue family matches one of the preferred families. */
+export function palettesForHueFamilies(
+  families: readonly HueFamily[]
+): NamedPalette[] {
+  return PALETTE_NAMES.filter((name) =>
+    families.includes(PALETTE_META[name].hueFamily)
+  );
 }
